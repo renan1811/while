@@ -1,0 +1,72 @@
+<meta charset="UTF-8">
+<script>
+    /*
+    PROBLEMA: PESQUISA DE IDADE
+    Foi feita uma pesquisa entre os habitantes de uma região. Foram coletados os dados de idade, sexo (M/F) e salário. Faça um programa que calcule e mostre:
+
+    a) A média dos salários do grupo;
+    b) A maior e a menor idade do grupo;
+    c) A quantidade de mulheres na região;
+    d) A idade e o sexo da pessoa que possui o menor salário;
+
+    Finalize a entrada de dados ao ser digitada uma idade negativa.
+    */
+
+
+    //ENTRADA
+    let somaSalarios = 0;
+    let totalPessoas = 0;
+    let maiorIdade = 0;
+    let menorIdade = Infinity;
+    let quantidadeMulheres = 0;
+    let menorSalario = 0;
+    let idadeMenorSalario = 0;
+    let sexoMenorSalario = "";
+
+    //PROCESSAMENTO
+    let idade = 0;
+    while (idade >= 0) {
+        idade = Number(prompt(`Digite a idade (negativo para parar):`));
+
+        if (idade < 0) break;
+
+        let sexo = prompt(`Qual o sexo (M/F):`).toUpperCase();
+        while (sexo !== "M" && sexo !== "F") {
+            sexo = prompt("Digite um sexo válido (M/F):").toUpperCase();
+        }
+
+        let salario = Number(prompt(`Quanto é o salário:`));
+
+        somaSalarios += salario;
+        totalPessoas++;
+
+        if (idade > maiorIdade) {
+            maiorIdade = idade;
+        }
+        if (idade < menorIdade) {
+            menorIdade = idade;
+        }
+
+        if (sexo === "F") {
+            quantidadeMulheres++;
+        }
+
+        if (salario < menorSalario || menorSalario === 0) {
+            menorSalario = salario;
+            idadeMenorSalario = idade;
+            sexoMenorSalario = sexo;
+        }
+    }
+
+    let mediaSalarios = somaSalarios / totalPessoas;
+
+    //SAÍDA
+    document.write(`
+        A média dos salários do grupo é: R$ ${mediaSalarios.toFixed(2)}<br>
+        A maior idade do grupo é: ${maiorIdade}<br>
+        A menor idade do grupo é: ${menorIdade}<br>
+        A quantidade de mulheres na região é: ${quantidadeMulheres}<br>
+        A pessoa com o menor salário tem ${idadeMenorSalario} anos e o sexo é ${sexoMenorSalario}.<br>
+    `);
+
+</script>
